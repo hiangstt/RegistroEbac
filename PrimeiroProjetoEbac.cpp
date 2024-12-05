@@ -7,16 +7,12 @@ void registro(){				//aba de registro de usuario
 
 	setlocale(LC_ALL, "Portuguese"); //Definição de linguagem
 
-	char arquivo[40];		//variaveis
-	char cpf[40];
-	char nome[40];
-	char sobrenome[40];
-	char cargo[40];
-	
+	char arquivo[40], cpf[40], nome[40], sobrenome[40], cargo[40];		//variaveis
+
 	printf("CPF a ser cadastrado: ");
-	scanf("%s", cpf);
+	scanf("%s", cpf);		//Coleta de dados a ser cadastrado
 	
-	strcpy(arquivo, cpf);//copiar o valor da string
+	strcpy(arquivo, cpf);		//copiar o valor da string
 	
 	FILE *file;				//cria o arquivo banco de dados
 	file = fopen(arquivo, "w");		//funcao "WRITE" para criar o arquivo
@@ -24,82 +20,83 @@ void registro(){				//aba de registro de usuario
 		fprintf(file, "|");
 	fclose(file);			//fecha o arquivo salvo
 	
-	printf("Digite o NOME a ser cadastrado: ");
+	printf("Digite o NOME a ser cadastrado: "); 		//COLETA DE DADOS
 	 scanf("%s", nome);	
 	 file = fopen(arquivo, "a");
 		fprintf(file,nome);
 		fprintf(file, "|");
 	 fclose(file);
-	 
-	
-	printf("Digite o SOBRENOME a ser cadastrado: ");
+	 	
+	printf("Digite o SOBRENOME a ser cadastrado: ");		//COLETA DE DADOS
 	 scanf("%s", sobrenome);	
 	 file = fopen(arquivo, "a");
 		fprintf(file,sobrenome);
 		fprintf(file, "|");
 	fclose(file);
-	
-	
-	
-	printf("Digite o CARGO a ser cadastrado: ");
+		
+	printf("Digite o CARGO a ser cadastrado: ");		//COLETA DE DADOS
 	 scanf(" %[^\n]", cargo);	
 	 file = fopen(arquivo, "a");
 		fprintf(file,cargo);
 		fprintf(file, "|");
 	fclose(file);
-	
+	printf("Sucesso ao criar usuario!\n");	
 	system("pause");
-
 }
 
-void consulta(){
+void consulta(){		//Aba de consulta
 	
-	setlocale(LC_ALL, "Portuguese"); //Definição de linguagem
+	setlocale(LC_ALL, "Portuguese");	 //Definição de linguagem
 
-	char cpf[40], conteudo[200];
+	char cpf[40], conteudo[200]; 	//Definicao de variaveis
 	
-	printf("Digite o CPF a ser consultado:");
+	printf("Digite o CPF a ser consultado:");	//Coleta de dados para consulta
 	scanf("%s",cpf);
 	
-	FILE *file;
-	file = fopen(cpf, "r");
-	 if (file == NULL) {
+	FILE *file;  //Funcao arquivo
+	file = fopen(cpf, "r");  //Definicao abrir arquivo "cpf" funcao "read"
+	 if (file == NULL) {	//Retorno se CPF for inexistente
         printf("Não foi possível encontrar o CPF digitado\n");
+        system("pause");
      }
      
-    while(fgets(conteudo, 200, file) != NULL){
+    while(fgets(conteudo, 200, file) != NULL){		//Coleta de dados do arquivo
     	printf("\nEssas são as informações do usuário: ");
-    	printf("%s", conteudo);
+    	printf("%s", conteudo);		//Exibicao do conteudo na tela //%s string
     	printf("\n\n");
     	system("pause");
 	}
-	fclose(file);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	fclose(file);	
 }
 
-void exclusao(){
+void exclusao(){		//Aba 
 	
+	char cpf[40]; //Declaracao de variaveis
 	
+	printf("Digite o CPF a ser deletado: "); //Coleta de dados
+	scanf("%s", cpf);
+	
+	FILE *file;
+	file = fopen(cpf, "r");
+		if (file == NULL) {
+    		printf("Não foi possível encontrar o CPF digitado\n");
+        	system("pause");
+     }
+    fclose(file);
+		
+	if (remove(cpf) == 0) { 		//Verificacao se o arquivo foi removido
+        printf("Usuário deletado com sucesso\n");
+    } else {
+        printf("Erro ao deletar o usuário\n");
+    }
+	system("pause");		
 }
-
-
-
 
 int main()
 {
 	int opcao=0; //Definição de variaveis
 	int repeticao=1;
 	
-
 	setlocale(LC_ALL, "Portuguese"); //Definição de linguagem
 		
 	for(repeticao=1;repeticao=1;)
@@ -108,28 +105,34 @@ int main()
    	    printf("\t=========== Cartorio EBAC ===========\n\n");//MENU INICIAL
 		printf("\t1 - Registrar nomes\n");
 		printf("\t2 - Consultar nomes\n");
-		printf("\t3 - Deletar nomes\n\n");
+		printf("\t3 - Deletar nomes\n");
+		printf("\t4 - Sair do programa\n\n");
 		printf("Opção: ");
 	
 		scanf("%d", &opcao); //Leitura da variavel para ser usada no if
 	
     	system("cls"); // limpeza da tela
     
-    	//INICIO DA SELEÇÃO
+    	//INICIO DA SELEÇÃO:
     	switch(opcao){
     		
     		case 1:    //condição de registro de nomes
-    		    registro();
+    		    registro();		//Chama a funcao
     		break;
 					
 			case 2:	//condicao de consulta de nomes
-			    consulta();
+			    consulta();		//Chama a funcao
 			break;
 			  	
 			case 3:	//condicao de exclusao de nomes
-			    exclusao();
+			    exclusao();		//Chama a funcao
 	   		break;
-	       	
+
+			case 4:	//condicao de exclusao de nomes
+			    printf("Fechando aplicação");
+			    return 0;
+	   		break;
+
 			default:	//condicao alem do esperado
 			    system("cls");
 				printf("Esta opção não esta disponível\n");
