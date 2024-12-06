@@ -103,7 +103,7 @@ int main()
         printf("Digite a senha de acesso: ");
         scanf("%s", senha);     //Salva a senha digitada
 
-        comp = strcmp(senha, "teste");   //Compara a senha digitada com a senha correta
+        comp = strcmp(senha, "admin");   //Compara a senha digitada com a senha correta
 
         if (comp != 0) {   //Se a senha estiver incorreta
             printf("Senha incorreta! Tente novamente.\n");
