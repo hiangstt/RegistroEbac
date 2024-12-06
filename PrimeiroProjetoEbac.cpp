@@ -40,7 +40,7 @@ void registro(){				//aba de registro de usuario
 		fprintf(file,cargo);
 		fprintf(file, "|");
 	fclose(file);
-	printf("Sucesso ao criar usuario!\n");	
+	printf("Sucesso ao criar usuário!\n");	
 	system("pause");
 }
 
@@ -95,49 +95,57 @@ void exclusao(){		//Aba
 int main()
 {
 	int opcao=0; //Definição de variaveis
-	int repeticao=1;
-	
+	char comp=-1, senha[]="a";
 	setlocale(LC_ALL, "Portuguese"); //Definição de linguagem
-		
-	for(repeticao=1;repeticao=1;)
-	{
-	    system("cls");
-   	    printf("\t=========== Cartorio EBAC ===========\n\n");//MENU INICIAL
-		printf("\t1 - Registrar nomes\n");
-		printf("\t2 - Consultar nomes\n");
-		printf("\t3 - Deletar nomes\n");
-		printf("\t4 - Sair do programa\n\n");
-		printf("Opção: ");
 	
-		scanf("%d", &opcao); //Leitura da variavel para ser usada no if
-	
-    	system("cls"); // limpeza da tela
-    
-    	//INICIO DA SELEÇÃO:
-    	switch(opcao){
-    		
-    		case 1:    //condição de registro de nomes
-    		    registro();		//Chama a funcao
-    		break;
-					
-			case 2:	//condicao de consulta de nomes
-			    consulta();		//Chama a funcao
-			break;
-			  	
-			case 3:	//condicao de exclusao de nomes
-			    exclusao();		//Chama a funcao
-	   		break;
+	while (comp != 0) { 		//Looping para repetir a senha sem fechar o programa
+        system("cls");
+        printf("Digite a senha de acesso: ");
+        scanf("%s", senha);     //Salva a senha digitada
 
-			case 4:	//condicao de exclusao de nomes
-			    printf("Fechando aplicação");
-			    return 0;
-	   		break;
+        comp = strcmp(senha, "teste");   //Compara a senha digitada com a senha correta
 
-			default:	//condicao alem do esperado
-			    system("cls");
-				printf("Esta opção não esta disponível\n");
-				system("pause");
-			break;
-		}
- 	}
-}
+        if (comp != 0) {   //Se a senha estiver incorreta
+            printf("Senha incorreta! Tente novamente.\n");
+            system("pause"); 
+        }
+    }
+  		while (1) {
+    	   	system("cls");
+    	    printf("\t=========== Cartorio EBAC ===========\n\n"); // MENU INICIAL
+    	    printf("\t1 - Registrar nomes\n");
+    	    printf("\t2 - Consultar nomes\n");
+    	    printf("\t3 - Deletar nomes\n");
+    	    printf("\t4 - Sair do programa\n\n");
+    	    printf("Opção: ");
+
+	        scanf("%d", &opcao); // Leitura da variável para ser usada no switch
+
+	        system("cls"); // Limpeza da tela
+
+	        // INÍCIO DA SELEÇÃO:
+	        switch (opcao) {
+	            case 1: // Condição de registro de nomes
+	                registro(); // Chama a função
+   	             break;
+
+	            case 2: // Condição de consulta de nomes
+	                consulta(); // Chama a função
+   		            break;
+
+    	        case 3: // Condição de exclusão de nomes
+        	        exclusao(); // Chama a função
+        	        break;
+
+    	        case 4: // Opção para sair
+    	            printf("Fechando aplicação\n");
+    	            return 0;
+
+   	        	default: // Condição além do esperado
+                	system("cls");
+            	    printf("Esta opção não está disponível\n");
+            	    system("pause");
+            	    break;
+        	}
+    	}
+	}
